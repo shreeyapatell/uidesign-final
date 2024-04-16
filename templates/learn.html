@@ -1,0 +1,32 @@
+{% include 'header.html' %}
+<body>
+    <script type="text/javascript">
+        let lesson = {{lesson|tojson}}
+
+        $(document).ready(function(){
+            $("#next_button").click(function(){
+                if("{{lesson.next_lesson}}" == "end"){
+                    window.location.href = "/quiz/1"
+                }
+                else{
+                    window.location.href = "/learn/{{lesson.next_lesson}}"
+                }
+            })
+            $("#prev_button").click(function(){
+                if("{{lesson.prev_lesson}}" == "beg"){
+                    window.location.href = "/"
+                }
+                else{
+                    window.location.href = "/learn/{{lesson.prev_lesson}}"
+                }
+            })
+        })
+    </script>
+    <h1>Lesson # {{lesson.lesson_id}}: {{lesson.title}}</h1>
+    <br><br>
+    <button id="prev_button">Back</button>
+    <iframe width="560" height="315" src="{{lesson.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <button id="next_button">Next</button>
+    <br>
+    <p>{{lesson.text}}</p>
+</body>
