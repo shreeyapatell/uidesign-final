@@ -63,3 +63,14 @@ p {
     color: #121212;
 }
 
+.progress {
+    height: 10px;
+    width: 80px;
+
+}
+
+.progress-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
