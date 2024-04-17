@@ -6,8 +6,10 @@
     $(document).ready(function () {
       $("#next_button").click(function () {
         if ("{{ question.next_q }}" == "end") {
-          window.location.href = "/";
+          // If it's the last question, submit the quiz
+          submitQuiz();
         } else {
+          const selectedAnswer = $("input[name='video']:checked").val();
           window.location.href = "/quiz/{{ question.next_q }}";
         }
       });
@@ -19,6 +21,24 @@
         }
       });
     });
+
+    function submitQuiz() {
+      let correctCount = 0;
+
+      // Get the selected answer
+      const selectedAnswer = $("input[name='video']:checked").val();
+
+      // Compare the selected answer to the correct answer
+      const correctAnswer = "{{ question.correct_answer }}"; // Assuming question.correct_answer stores the correct video URL
+      if (selectedAnswer === correctAnswer) {
+        correctCount++;
+      }
+      // Submit the quiz by creating a form and submitting it via POST method
+      const form = $('<form action="/quiz/{{ question.quiz_id }}" method="post"></form>');
+      form.appendTo('body').submit();
+    }
+
+
   </script>
   <div class="container">
     <h1>Quiz Question # {{ question.quiz_id }}: {{ question.title }}</h1>
@@ -73,8 +93,14 @@
     <div class="button-container">
         <button id="prev_button">Back</button> 
         <button id="next_button">Next</button>
+        {% if question.next_q == 'end' %}
+          <a href="#" class="btn btn-primary" onclick="submitQuiz()">Get Results</a>
+        {% endif %}
     </div>
     <br>
     <p>{{ question.text }}</p>
   </div>
+
+  
 </body>
+
