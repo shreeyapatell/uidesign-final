@@ -49,8 +49,26 @@ quiz_questions = {
     "video1": "https://www.youtube.com/embed/NJbkr3BerEU?si=McXm3adcEVxfoakx",
     "video2": "https://www.youtube.com/embed/VoetY5cF1Oo?si=m4omJGl_KJk_wUao",
     "video3": "https://www.youtube.com/embed/bsYCP5SEHSk?si=ucJd7EDJxQHm6A9Q",
-    "next_q": "end",
+    "next_q": "2",
     "prev_q": "beg"
+    },
+    "2": {
+        "quiz_id": "2",
+        "title": "What is the sign for \"Right\"",
+        "video1": "https://www.youtube.com/embed/VoetY5cF1Oo?si=Xcvr84frYjrnyXRo",
+        "video2": "https://www.youtube.com/embed/rVE_TKIclps?si=bwHg9Q2Es8s4uH5G",
+        "video3": "https://www.youtube.com/embed/0nq-8ZTXrFo?si=KlR82HUW6y5H70eT",
+        "next_q": "3",
+        "prev_q": "1"
+    },
+    "3": {
+        "quiz_id": "3",
+        "title": "What is the sign for \"Here\"",
+        "video1": "https://www.youtube.com/embed/rVE_TKIclps?si=t7pu1oFYsP6turCy",
+        "video2": "https://www.youtube.com/embed/2dALbgMQWmk?si=LSCFAD5jdV8bznOw",
+        "video3": "https://www.youtube.com/embed/NH2cqOYnQYY?si=PAVMxWhO-8-6SnSf",
+        "next_q": "end",
+        "prev_q": "2"
     }
 }
 
