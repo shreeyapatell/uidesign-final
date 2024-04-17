@@ -90,25 +90,28 @@ quiz_res = []
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz(quiz_id):
     question = quiz_questions.get(quiz_id)
-    # print("the value of the question is: ", question)
     if not question:
         return "Question not found", 404
     
     if request.method == 'POST':
         # Process submitted quiz answers
         selected_answer = request.form.get('video')
-        #print("Form data received:", request.form)
-        #print('The selected answer is:', selected_answer)
         user_responses = {quiz_id: selected_answer}
         score_percentage = calculate_score(user_responses)
-        #print("Score: ", score_percentage)
-        # Redirect to quiz results page
+        
+        # Redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
             return render_template('quiz_results.html', score_percentage=score_percentage)
-        # PROBLEMATIC LINE:
-        return render_template('quiz.html', question=quiz_questions[question["next_q"]])
+        
+        # Render the next question
+        next_question_id = question["next_q"]
+        next_question = quiz_questions.get(next_question_id)
+        if not next_question:
+            return "Next question not found", 404
+        return render_template('quiz.html', question=next_question)
             
     return render_template('quiz.html', question=question)
+
 
 
 
