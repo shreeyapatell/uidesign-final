@@ -5,28 +5,28 @@
     <div class="row">
       <div class="col-md-4">
         <div class="card">
-          <div class="card-header">Unit 1: Basic Directions</div>
-          <div class="card-body">
+          <div class="center card-header">Unit 1: Basic Directions</div>
+          <div class="center card-body">
             <p class="card-text">Learn words like here, left, right, etc. </p>
-            <a href="#" class="btn btn-primary">Start</a>
+            <a href="{{ url_for('learn', lesson_id=1) }}" class="btn btn-primary">Start</a>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <div class="card-header">Unit 2: Directional Objects </div>
-          <div class="card-body">
+          <div class="center card-header">Unit 2: Directional Objects </div>
+          <div class="center card-body">
             <p class="card-text">Learn words like gate, door, traffic, etc.</p>
-            <a href="#" class="btn btn-primary disabled">Locked</a>
+            <a href="{{ url_for('learn', lesson_id=2) }}" class="center btn btn-primary disabled">Locked</a>
           </div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="card">
-          <div class="card-header">Unit 3: Places</div>
-          <div class="card-body">
+          <div class="center card-header">Unit 3: Places</div>
+          <div class="center card-body">
             <p class="card-text">Learn words like hospital, bathroom, restaurant, etc.</p>
-            <a href="#" class="btn btn-primary disabled">Locked</a>
+            <a href="{{ url_for('learn', lesson_id=3) }}" class="center btn btn-primary disabled">Locked</a>
           </div>
         </div>
       </div>
