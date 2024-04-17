@@ -83,12 +83,23 @@ def layout():
 
 @app.route('/learn/<lesson_id>')
 def learn(lesson_id):
-    lesson=lessons[lesson_id]
+    lesson = lessons[lesson_id]
+    
+    # Calculate progress
+    total_lessons = len(lessons)
+    current_lesson_index = int(lesson_id)
+    progress = (current_lesson_index / total_lessons) * 100
+    lesson['progress'] = progress
+    
     return render_template('learn.html', lesson=lesson)
 
+
 quiz_res = []
+
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz(quiz_id):
+    global quiz_res  # Access the global quiz_res list
+
     question = quiz_questions.get(quiz_id)
     if not question:
         return "Question not found", 404
@@ -97,10 +108,11 @@ def quiz(quiz_id):
         # Process submitted quiz answers
         selected_answer = request.form.get('video')
         user_responses = {quiz_id: selected_answer}
-        score_percentage = calculate_score(user_responses)
+        quiz_res.append(user_responses)  # Store the user responses
         
         # Redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
+            score_percentage = calculate_score(quiz_res)
             return render_template('quiz_results.html', score_percentage=score_percentage)
         
         # Render the next question
@@ -112,24 +124,11 @@ def quiz(quiz_id):
             
     return render_template('quiz.html', question=question)
 
-
-
-
-def calculate_score(user_responses):
-    total_questions = len(user_responses)
-    total_correct = 0 
-    print(user_responses)
-    for question_id, user_response in user_responses.items(): 
-        print(user_response, quiz_questions[question_id]["correct_answer"])
-        if user_response == quiz_questions[question_id]["correct_answer"]: 
-            total_correct += 1 
-
-    # total_correct = sum(1 for question_id, user_response in user_responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
+def calculate_score(quiz_res):
+    total_questions = len(quiz_res)
+    total_correct = sum(1 for responses in quiz_res for question_id, user_response in responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
     score_percentage = (total_correct / total_questions) * 100
     return score_percentage
-    #return total_questions
- 
-
 
 
 if __name__ == '__main__':
