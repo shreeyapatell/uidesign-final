@@ -86,33 +86,46 @@ def learn(lesson_id):
     lesson=lessons[lesson_id]
     return render_template('learn.html', lesson=lesson)
 
-
+quiz_res = []
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz(quiz_id):
     question = quiz_questions.get(quiz_id)
+    # print("the value of the question is: ", question)
     if not question:
         return "Question not found", 404
     
     if request.method == 'POST':
         # Process submitted quiz answers
-        selected_answer = request.form.get('video')  # Assuming the radio button values are the video URLs
+        selected_answer = request.form.get('video')
+        #print("Form data received:", request.form)
+        #print('The selected answer is:', selected_answer)
         user_responses = {quiz_id: selected_answer}
         score_percentage = calculate_score(user_responses)
-        return render_template('quiz_results.html', score_percentage=score_percentage)
-
-    
+        #print("Score: ", score_percentage)
+        # Redirect to quiz results page
+        if question["next_q"] == "end":
+            return render_template('quiz_results.html', score_percentage=score_percentage)
+        # PROBLEMATIC LINE:
+        return render_template('quiz.html', question=quiz_questions[question["next_q"]])
+            
     return render_template('quiz.html', question=question)
+
 
 
 def calculate_score(user_responses):
     total_questions = len(user_responses)
-    total_correct = sum(1 for question_id, user_response in user_responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
+    total_correct = 0 
+    print(user_responses)
+    for question_id, user_response in user_responses.items(): 
+        print(user_response, quiz_questions[question_id]["correct_answer"])
+        if user_response == quiz_questions[question_id]["correct_answer"]: 
+            total_correct += 1 
+
+    # total_correct = sum(1 for question_id, user_response in user_responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
     score_percentage = (total_correct / total_questions) * 100
     return score_percentage
     #return total_questions
  
-
-
 
 
 
