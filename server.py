@@ -81,17 +81,23 @@ quiz_questions = {
 def layout():
     return render_template('layout.html')
 
+import datetime
+
 @app.route('/learn/<lesson_id>')
 def learn(lesson_id):
     lesson = lessons[lesson_id]
     
-    # calculate progress
+    # Calculate progress
     total_lessons = len(lessons)
     current_lesson_index = int(lesson_id)
     progress = (current_lesson_index / total_lessons) * 100
     lesson['progress'] = progress
     
+    # Add start time
+    lesson['start_time'] = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    
     return render_template('learn.html', lesson=lesson)
+
 
 
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
