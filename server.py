@@ -49,7 +49,7 @@ quiz_questions = {
     "video1": "https://www.youtube.com/embed/NJbkr3BerEU?si=McXm3adcEVxfoakx",
     "video2": "https://www.youtube.com/embed/VoetY5cF1Oo?si=m4omJGl_KJk_wUao",
     "video3": "https://www.youtube.com/embed/bsYCP5SEHSk?si=ucJd7EDJxQHm6A9Q",
-    "correct_answer": "question.video2",
+    "correct_answer": "https://www.youtube.com/embed/VoetY5cF1Oo?si=m4omJGl_KJk_wUao",
     "next_q": "2",
     "prev_q": "beg"
     },
@@ -59,7 +59,7 @@ quiz_questions = {
         "video1": "https://www.youtube.com/embed/VoetY5cF1Oo?si=Xcvr84frYjrnyXRo",
         "video2": "https://www.youtube.com/embed/rVE_TKIclps?si=bwHg9Q2Es8s4uH5G",
         "video3": "https://www.youtube.com/embed/0nq-8ZTXrFo?si=KlR82HUW6y5H70eT",
-        "correct_answer": "question.video3",
+        "correct_answer": "https://www.youtube.com/embed/0nq-8ZTXrFo?si=KlR82HUW6y5H70eT",
         "next_q": "3",
         "prev_q": "1"
     },
@@ -69,7 +69,7 @@ quiz_questions = {
         "video1": "https://www.youtube.com/embed/rVE_TKIclps?si=t7pu1oFYsP6turCy",
         "video2": "https://www.youtube.com/embed/2dALbgMQWmk?si=LSCFAD5jdV8bznOw",
         "video3": "https://www.youtube.com/embed/NH2cqOYnQYY?si=PAVMxWhO-8-6SnSf",
-        "correct_answer": "question.video2",
+        "correct_answer": "https://www.youtube.com/embed/2dALbgMQWmk?si=LSCFAD5jdV8bznOw", 
         "next_q": "end",
         "prev_q": "2"
     }
@@ -95,10 +95,11 @@ def quiz(quiz_id):
     
     if request.method == 'POST':
         # Process submitted quiz answers
-        selected_answer = request.form.get('selected_answer')
+        selected_answer = request.form.get('video')  # Assuming the radio button values are the video URLs
         user_responses = {quiz_id: selected_answer}
         score_percentage = calculate_score(user_responses)
         return render_template('quiz_results.html', score_percentage=score_percentage)
+
     
     return render_template('quiz.html', question=question)
 
@@ -108,6 +109,9 @@ def calculate_score(user_responses):
     total_correct = sum(1 for question_id, user_response in user_responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
     score_percentage = (total_correct / total_questions) * 100
     return score_percentage
+    #return total_questions
+ 
+
 
 
 

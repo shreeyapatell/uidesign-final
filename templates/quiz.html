@@ -9,6 +9,7 @@
           // If it's the last question, submit the quiz
           submitQuiz();
         } else {
+          const selectedAnswer = $("input[name='video']:checked").val();
           window.location.href = "/quiz/{{ question.next_q }}";
         }
       });
@@ -22,6 +23,16 @@
     });
 
     function submitQuiz() {
+      let correctCount = 0;
+
+      // Get the selected answer
+      const selectedAnswer = $("input[name='video']:checked").val();
+
+      // Compare the selected answer to the correct answer
+      const correctAnswer = "{{ question.correct_answer }}"; // Assuming question.correct_answer stores the correct video URL
+      if (selectedAnswer === correctAnswer) {
+        correctCount++;
+      }
       // Submit the quiz by creating a form and submitting it via POST method
       const form = $('<form action="/quiz/{{ question.quiz_id }}" method="post"></form>');
       form.appendTo('body').submit();
