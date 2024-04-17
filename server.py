@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, jsonify
 app = Flask(__name__)
 from random import randint
 
-
+quiz_res = []
 
 lessons= {
     "1": {"lesson_id": "1",
@@ -85,7 +85,7 @@ def layout():
 def learn(lesson_id):
     lesson = lessons[lesson_id]
     
-    # Calculate progress
+    # calculate progress
     total_lessons = len(lessons)
     current_lesson_index = int(lesson_id)
     progress = (current_lesson_index / total_lessons) * 100
@@ -94,28 +94,26 @@ def learn(lesson_id):
     return render_template('learn.html', lesson=lesson)
 
 
-quiz_res = []
-
 @app.route('/quiz/<quiz_id>', methods=['GET', 'POST'])
 def quiz(quiz_id):
-    global quiz_res  # Access the global quiz_res list
+    global quiz_res
 
     question = quiz_questions.get(quiz_id)
     if not question:
         return "Question not found", 404
     
     if request.method == 'POST':
-        # Process submitted quiz answers
+        # process submitted quiz answers
         selected_answer = request.form.get('video')
         user_responses = {quiz_id: selected_answer}
         quiz_res.append(user_responses)  # Store the user responses
         
-        # Redirect to quiz results page if it's the last question
+        # redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
             score_percentage = calculate_score(quiz_res)
             return render_template('quiz_results.html', score_percentage=score_percentage)
         
-        # Render the next question
+        # render the next question
         next_question_id = question["next_q"]
         next_question = quiz_questions.get(next_question_id)
         if not next_question:
