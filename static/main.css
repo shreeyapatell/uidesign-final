@@ -98,3 +98,7 @@ p {
 #lesson-time{
     color: grey;
 }
+
+#question-title{
+    font-size: 20px;
+}

@@ -12,7 +12,8 @@
     });
   </script>
   <div class="container">
-    <h1>Quiz Question # {{ question.quiz_id }}: {{ question.title }}?</h1>
+    <h1>Quiz Question # {{ question.quiz_id }}</h1>
+    <p id="question-title">{{ question.title }}?</p>
     <form method="post" action="/quiz/{{ question.quiz_id }}">
         <br><br>
         <div class="row">
