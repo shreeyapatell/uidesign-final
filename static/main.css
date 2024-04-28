@@ -79,9 +79,9 @@ p {
 }
 
 .progress {
-    height: 10px;
-    width: 80px;
-    margin-top: 0;
+    height: 15px;
+    width: 120px;
+    margin-bottom: 12px;
 
 }
 
@@ -89,4 +89,12 @@ p {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+#lesson-text{
+    max-width: 60%;
+    margin: 0 auto; 
+}
+
+#lesson-time{
+    color: grey;
 }
