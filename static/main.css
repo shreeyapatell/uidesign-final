@@ -1,7 +1,13 @@
 /* quiz.css */
+@font-face {
+    font-family: 'Albert Sans';
+    src: url('/static/ttf/albertsans-regular.ttf') format('truetype'); /* Adjust the filenames and paths as necessary */
+    font-weight: bold;
+    font-style: normal;
+}
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Albert Sans', sans-serif;
     margin: 0;
     padding: 0;
     background: #D3CCE3;  /* fallback for old browsers */

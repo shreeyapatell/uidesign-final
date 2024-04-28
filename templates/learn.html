@@ -25,7 +25,7 @@
     <h1>Lesson # {{lesson.lesson_id}}: {{lesson.title}}</h1>
     <p>{{lesson.text}}</p>
     <p>Lesson Start Time: {{ lesson.start_time }}</p> <!-- Display start time -->
-    <iframe width="560" height="315" src="{{lesson.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <iframe width="560" height="315" src="{{ lesson.video }}" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
     <!-- Progress bar -->
     <div class="progress-container">
         <p>Lesson progress: &nbsp </p>
