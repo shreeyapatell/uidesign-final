@@ -22,7 +22,7 @@ lessons= {
      "3": {"lesson_id": "3",
     "title": "Learn to sign \"Turn Right\"",
     "video": "/static/files/right.mp4",
-    "text": "To sign \"turn right\", extend your right hand's index and middle finger, twist them together, and point them to the sky. Have your palm facing towards you. Then, move your right hand to the right so your palm faces forward.", 
+    "text": "To sign \"turn right\", twist your right hand's index and middle finger together, and point them to the sky. Have your palm facing towards you. Then, twist your right hand to the right so your palm faces forward.", 
     "next_lesson": "4",
     "prev_lesson": "2"
     },
@@ -130,9 +130,8 @@ def quiz(quiz_id):
 def calculate_score(quiz_res):
     total_questions = len(quiz_res)
     total_correct = sum(1 for responses in quiz_res for question_id, user_response in responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
-    score_percentage = (total_correct / total_questions) * 100
+    score_percentage = round(((total_correct / total_questions) * 100), 1)
     return score_percentage
-
 
 if __name__ == '__main__':
     app.run(debug=True)

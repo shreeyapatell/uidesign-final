@@ -64,9 +64,10 @@
         </div>
         <div class="button-container">
             <button id="prev_button">Back</button> 
-            <button type="submit" id="next_button">Next</button>
-            {% if question.next_q == 'end' %}
-            <button type="submit" class="btn btn-primary">Get Results</button>
+            {% if question.next_q != 'end' %}
+                <button type="submit" id="next_button">Next</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary">Get Results</button>
             {% endif %}
         </div>
         <br>
