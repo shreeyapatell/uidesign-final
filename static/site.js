@@ -1,4 +1,8 @@
 $(document).ready(function(){
+
+    // $("#unit2-lock").addClass("disabled");
+    // $("#final-lock").addClass("disabled");
+
     $("#next_button").click(function(){
         // Handle next button click
         if("{{question.next_q}}" == "end"){
@@ -15,5 +19,11 @@ $(document).ready(function(){
         } else {
             window.location.href = "/quiz/{{question.prev_q}}";
         }
+    });
+
+    $("#next_unit").click(function(){
+        $("#unit2-lock").removeClass("disabled").addClass("btn btn-primary");
+        window.location.href = "/";
+
     });
 });
