@@ -6,6 +6,7 @@ quiz_res = []
 
 lessons= {
     "1": {"lesson_id": "1",
+    "unit": 1,
     "title": "Learn to sign \"Here\"",
     "video": "/static/files/here.mp4",
     "text": "To sign \"here\", open your palms and lay them flat in front of your stomach with palms facing up. Create an outward circular motion with both hands at the same time.",
@@ -13,6 +14,7 @@ lessons= {
     "prev_lesson": "beg"
     },
     "2": {"lesson_id": "2",
+    "unit": 1,
     "title": "Learn to sign \"Turn Left\"",
     "video": "/static/files/left.mp4",
     "text": "To sign \"turn left\", extend your left hand's thumb and pointer finger while keeping the rest of your hand closed. Point your thumb towards you and your pointer finger towards the sky. Then, turn your hand to the left.",
@@ -20,6 +22,7 @@ lessons= {
     "prev_lesson": "1"
     },
      "3": {"lesson_id": "3",
+    "unit": 1,
     "title": "Learn to sign \"Turn Right\"",
     "video": "/static/files/right.mp4",
     "text": "To sign \"turn right\", twist your right hand's index and middle finger together, and point them to the sky. Have your palm facing towards you. Then, twist your right hand to the right so your palm faces forward.", 
@@ -27,6 +30,7 @@ lessons= {
     "prev_lesson": "2"
     },
      "4": {"lesson_id": "4",
+    "unit": 1,
     "title": "Learn to sign \"Behind\"",
     "video": "/static/files/behind.mp4",
     "text": "To sign \"behind\", create two fists, one with each hand. Place one fist behind the other, almost like you're hitting the back of one fist with the other.",
@@ -34,11 +38,44 @@ lessons= {
     "prev_lesson": "3"
     },
     "5": {"lesson_id": "5",
+    "unit": 1,
     "title": "Learn to sign \"Go Forward\"",
     "video": "/static/files/proceed.mp4",
     "text": "To sign \"go forward\", on both hands, keep your palms facing towards you, with the fingers together and facing each other. Move both hands in a forward motion.",
     "next_lesson": "end",
     "prev_lesson": "4"
+    },
+    "6": {"lesson_id": "6",
+    "unit": 2,
+    "title": "Learn to sign \"Gate\"",
+    "video": "/static/files/gate.mp4",
+    "text": "To sign \"go forward\", on both hands, keep your palms facing towards you, with the fingers together and facing each other. Move both hands in a forward motion.",
+    "next_lesson": "7",
+    "prev_lesson": "beg"
+    },
+    "7": {"lesson_id": "7",
+    "unit": 2,
+    "title": "Learn to sign \"Traffic\"",
+    "video": "/static/files/traffic.mp4",
+    "text": "To sign \"go forward\", on both hands, keep your palms facing towards you, with the fingers together and facing each other. Move both hands in a forward motion.",
+    "next_lesson": "8",
+    "prev_lesson": "6"
+    },
+    "8": {"lesson_id": "8",
+    "unit": 2,
+    "title": "Learn to sign \"Door\"",
+    "video": "/static/files/door.mp4",
+    "text": "To sign \"go forward\", on both hands, keep your palms facing towards you, with the fingers together and facing each other. Move both hands in a forward motion.",
+    "next_lesson": "9",
+    "prev_lesson": "7"
+    },
+    "9": {"lesson_id": "9",
+    "unit": 2,
+    "title": "Learn to sign \"Road\"",
+    "video": "/static/files/road.mp4",
+    "text": "To sign \"road\", on both hands, keep your palms facing towards you, with the fingers together and facing each other. Move both hands in a forward motion.",
+    "next_lesson": "end2",
+    "prev_lesson": "8"
     }
 }
 
