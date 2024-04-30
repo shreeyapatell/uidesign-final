@@ -23,11 +23,13 @@
         })
     </script>
     <h1>Lesson # {{lesson.lesson_id}}: {{lesson.title}}</h1>
-    <div class="container">
-        <p>{{lesson.text}}</p>
-        <iframe width="560" height="315" src="{{lesson.video}}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+    <p id="lesson-text">{{lesson.text}}</p>
+    
+    <iframe width="560" height="315" src="{{ lesson.video }}" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+    <p id="lesson-time">Lesson Start Time: {{ lesson.start_time }}</p>
+    <!-- Progress bar -->
     <div class="progress-container">
-        <p>Lesson progress: &nbsp </p>
+        <p id="lesson-progress" style="font-size: 24px;">Lesson Progress: &nbsp;</p>
         <div class="progress">
             <div class="progress-bar" role="progressbar" style="width: {{ lesson.progress }}%;" aria-valuenow="{{ lesson.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>

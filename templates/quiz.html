@@ -12,7 +12,8 @@
     });
   </script>
   <div class="container">
-    <h1>Quiz Question # {{ question.quiz_id }}: {{ question.title }}</h1>
+    <h1>Quiz Question # {{ question.quiz_id }}</h1>
+    <p id="question-title">{{ question.title }}?</p>
     <form method="post" action="/quiz/{{ question.quiz_id }}">
         <br><br>
         <div class="row">
@@ -64,9 +65,10 @@
         </div>
         <div class="button-container">
             <button id="prev_button">Back</button> 
-            <button type="submit" id="next_button">Next</button>
-            {% if question.next_q == 'end' %}
-            <button type="submit" class="btn btn-primary">Get Results</button>
+            {% if question.next_q != 'end' %}
+                <button type="submit" id="next_button">Next</button>
+            {% else %}
+                <button type="submit" class="btn btn-primary">Get Results</button>
             {% endif %}
         </div>
         <br>
