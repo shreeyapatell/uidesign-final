@@ -1,18 +1,7 @@
 {% include 'header.html' %}
 <body>
-  <script type="text/javascript">
-    $(document).ready(function () {
-      $("#prev_button").click(function () {
-        if ("{{ question.prev_q }}" == "beg") {
-          window.location.href = "/";
-        } else {
-          window.location.href = "/quiz/{{ question.prev_q }}";
-        }
-      });
-    });
-  </script>
   <div class="container">
-    <h1>Quiz Question # {{ question.quiz_id }}</h1>
+    <h1>Unit {{question.unit}} - Question {{ question.num }}</h1>
     <p id="question-title">{{ question.title }}?</p>
     <form method="post" action="/quiz/{{ question.quiz_id }}">
         <br><br>
