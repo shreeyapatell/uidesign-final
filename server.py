@@ -175,6 +175,16 @@ quiz_questions = {
     }
 }
 
+def quiz_questions_generator():
+    generated_questions = []
+    selected_ids = set()
+    while len(generated_questions) < 3:
+        random_num = randint(1, 7)
+        if random_num not in selected_ids:
+            selected_ids.add(random_num)
+            generated_questions.append(quiz_questions[str(random_num)])
+    return generated_questions
+
 # Routes
 @app.route('/')
 def layout():
@@ -225,6 +235,11 @@ def quiz(quiz_id):
         return render_template('quiz.html', question=next_question)
             
     return render_template('quiz.html', question=question)
+
+@app.route('/final_quiz', methods=['GET'])
+def generate_quiz():
+    questions = quiz_questions_generator()
+    return render_template('final_quiz.html', questions=questions)
 
 def calculate_score(quiz_res):
     total_questions = len(quiz_res)
