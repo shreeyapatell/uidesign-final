@@ -237,7 +237,7 @@ def quiz(quiz_id):
     return render_template('quiz.html', question=question)
 
 @app.route('/final_quiz', methods=['GET'])
-def generate_quiz():
+def final_quiz():
     questions = quiz_questions_generator()
     return render_template('final_quiz.html', questions=questions)
 
