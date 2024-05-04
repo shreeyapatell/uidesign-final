@@ -13,8 +13,7 @@
 });
   </script>
   <div class="container">
-    <h1>Unit {{question.unit}} - Question {{ question.num }}</h1>
-    <p id="question-title">{{ question.title }}?</p>
+    <h1>Quiz Question # {{ question.quiz_id }}: {{ question.title }}?</h1>
     <form method="post" action="/quiz/{{ question.quiz_id }}">
         <br><br>
         <div class="row">
@@ -33,47 +32,16 @@
                     allowfullscreen
                 ></iframe>
             </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" name="video" value="{{ question.video2 }}"> Video 2
-                </label>
-                <iframe
-                    width="100%"
-                    height="200"
-                    src="{{ question.video2 }}"
-                    title="Video 2"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="no-referrer"
-                    allowfullscreen
-                ></iframe>
+            <div class="button-container">
+                <button type="submit" id="prev_button" name="prev_button">Back</button> <!-- Name added to the back button -->
+                {% if question.next_q != 'end' %}
+                    <button type="submit" id="next_button">Next</button>
+                {% else %}
+                    <button type="submit" class="btn btn-primary">Get Results</button>
+                {% endif %}
             </div>
-            <div class="col-md-4">
-                <label>
-                    <input type="radio" name="video" value="{{ question.video3 }}"> Video 3
-                </label>
-                <iframe
-                    width="100%"
-                    height="200"
-                    src="{{ question.video3 }}"
-                    title="Video 3"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    referrerpolicy="no-referrer"
-                    allowfullscreen
-                ></iframe>
-            </div>
-        </div>
-        <div class="button-container">
-            <button id="prev_button">Back</button> 
-            {% if question.next_q != 'end' %}
-                <button type="submit" id="next_button">Next</button>
-            {% else %}
-                <button type="submit" class="btn btn-primary">Get Results</button>
-            {% endif %}
-        </div>
-        <br>
-        <p>{{ question.text }}</p>
-    </form>
-</div>
+            <br>
+            <p>{{ question.text }}</p>
+        </form>
+    </div>
 </body>

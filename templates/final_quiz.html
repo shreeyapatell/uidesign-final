@@ -1,0 +1,106 @@
+{% include 'header.html' %}
+<body>
+  <div class="container">
+    {% set index = 0 %}
+    {% for question in questions %}
+    <div id="question{{ index }}" class="question {% if index != 0 %}hidden{% endif %}">
+      <h1>Unit {{ question.unit }} - Question {{ index + 1 }}</h1>
+      <p id="question-title">{{ question.title }}?</p>
+      <form id="form{{ index }}" class="question-form" method="post" action="/quiz/{{ question.quiz_id }}">
+          <br><br>
+          <div class="row">
+              <div class="col-md-4">
+                  <label>
+                      <input type="radio" name="video" value="{{ question.video1 }}"> Video 1
+                  </label>
+                  <iframe
+                      width="100%"
+                      height="200"
+                      src="{{ question.video1 }}"
+                      title="Video 1"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="no-referrer"
+                      allowfullscreen
+                  ></iframe>
+              </div>
+              <div class="col-md-4">
+                  <label>
+                      <input type="radio" name="video" value="{{ question.video2 }}"> Video 2
+                  </label>
+                  <iframe
+                      width="100%"
+                      height="200"
+                      src="{{ question.video2 }}"
+                      title="Video 2"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="no-referrer"
+                      allowfullscreen
+                  ></iframe>
+              </div>
+              <div class="col-md-4">
+                  <label>
+                      <input type="radio" name="video" value="{{ question.video3 }}"> Video 3
+                  </label>
+                  <iframe
+                      width="100%"
+                      height="200"
+                      src="{{ question.video3 }}"
+                      title="Video 3"
+                      frameborder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      referrerpolicy="no-referrer"
+                      allowfullscreen
+                  ></iframe>
+              </div>
+          </div>
+          <div class="button-container">
+              <button id="prev_button{{ index }}" {% if index == 0 %}style="display: none;"{% endif %}>Back</button>
+              <button type="button" class="next_button" data-index="{{ index }}">Next</button>
+              <button type="submit" class="submit_button" style="display: none;">Submit</button>
+          </div>
+          <br>
+          <p>{{ question.text }}</p>
+      </form>
+    </div>
+    {% set index = index + 1 %}
+    {% endfor %}
+</div>
+
+<script>
+  const nextButtons = document.querySelectorAll('.next_button');
+  const submitButtons = document.querySelectorAll('.submit_button');
+  const prevButtons = document.querySelectorAll('[id^="prev_button"]');
+
+  nextButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      const currentQuestion = document.getElementById(`question${index}`);
+      currentQuestion.classList.add('hidden');
+      const nextQuestion = document.getElementById(`question${index + 1}`);
+      nextQuestion.classList.remove('hidden');
+      prevButtons[index].style.display = 'block';
+      if (index === nextButtons.length - 1) {
+        button.style.display = 'none';
+        submitButtons[index].style.display = 'block';
+      }
+    });
+  });
+
+  prevButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      const currentIndex = index;
+      const currentQuestion = document.getElementById(`question${currentIndex}`);
+      currentQuestion.classList.add('hidden');
+      const prevQuestion = document.getElementById(`question${currentIndex - 1}`);
+      prevQuestion.classList.remove('hidden');
+      if (currentIndex === 1) {
+        button.style.display = 'none';
+      }
+      const nextButton = document.querySelector(`.next_button[data-index="${currentIndex - 1}"]`);
+      nextButton.style.display = 'block';
+      submitButtons[currentIndex - 1].style.display = 'none';
+    });
+  });
+</script>
+</body>
