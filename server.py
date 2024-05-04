@@ -217,7 +217,7 @@ def quiz(quiz_id):
         return "Question not found", 404
     
     if request.method == 'POST':
-        # process submitted quiz answers
+        # Process submitted quiz answers
         selected_answer = request.form.get('video')
         user_responses = {quiz_id: selected_answer}
         quiz_res.append(user_responses)  # Store the user responses
@@ -229,12 +229,14 @@ def quiz(quiz_id):
                 return "Previous question not found", 404
             return render_template('quiz.html', question=prev_question)
         
-        # redirect to quiz results page if it's the last question
+       
+        
+        # Redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
             score_percentage = calculate_score(quiz_res)
             return render_template('quiz_results.html', score_percentage=score_percentage)
         
-        # render the next question
+        # Render the next question
         next_question_id = question["next_q"]
         next_question = quiz_questions.get(next_question_id)
         if not next_question:
