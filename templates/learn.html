@@ -8,6 +8,9 @@
                 if("{{lesson.next_lesson}}" == "end"){
                     window.location.href = "/quiz/1"
                 }
+                else if("{{lesson.next_lesson}}" == "end2"){
+                    window.location.href = "/quiz/6"
+                }
                 else{
                     window.location.href = "/learn/{{lesson.next_lesson}}"
                 }
@@ -22,7 +25,7 @@
             })
         })
     </script>
-    <h1>Lesson # {{lesson.lesson_id}}: {{lesson.title}}</h1>
+    <h1>Unit {{lesson.unit}} - Lesson {{lesson.num}}: {{lesson.title}}</h1>
     <p id="lesson-text">{{lesson.text}}</p>
     
     <iframe width="560" height="315" src="{{ lesson.video }}" title="Video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -34,6 +37,8 @@
             <div class="progress-bar" role="progressbar" style="width: {{ lesson.progress }}%;" aria-valuenow="{{ lesson.progress }}" aria-valuemin="0" aria-valuemax="100"></div>
         </div>
     </div>
+ </div>
+
 
     <div class="button-container">
         <button id="prev_button">Back</button> 
