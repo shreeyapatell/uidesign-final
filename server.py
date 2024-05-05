@@ -173,6 +173,8 @@ quiz_questions = {
         "next_q": "end",
         "prev_q": "6"
     }
+
+   
 }
 
 def quiz_questions_generator():
