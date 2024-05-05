@@ -174,7 +174,7 @@ quiz_questions = {
         "prev_q": "6"
     }
 
-   
+    
 }
 
 def quiz_questions_generator():
@@ -236,6 +236,7 @@ def quiz(quiz_id):
         # Redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
             score_percentage = calculate_score(quiz_res)
+            quiz_res = []
             return render_template('quiz_results.html', score_percentage=score_percentage)
         
         # Render the next question
