@@ -231,8 +231,6 @@ def quiz(quiz_id):
                 return "Previous question not found", 404
             return render_template('quiz.html', question=prev_question)
         
-       
-        
         # Redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
             score_percentage = calculate_score(quiz_res)
@@ -254,11 +252,39 @@ def final_quiz():
     questions = quiz_questions_generator()
     return render_template('final_quiz.html', questions=questions)
 
+@app.route('/final_quiz/submit', methods=['POST'])
+def submit_final_quiz():
+    global quiz_res
+
+    # Retrieve the question IDs and selected answers from the form
+    question_ids = request.form.getlist('question_id')
+    selected_answers = request.form.getlist('video')
+
+    # Store the user responses as a list of dictionaries
+    user_responses = [{question_id: selected_answer} for question_id, selected_answer in zip(question_ids, selected_answers)]
+    quiz_res.extend(user_responses)  # Append the user responses to the quiz_res list
+
+    print(user_responses)
+    print(quiz_res)
+
+    # If all questions are answered, calculate the score
+    score_percentage = calculate_score(quiz_res)
+    print(score_percentage)
+    quiz_res = []  # Reset quiz responses
+    return render_template('final_quiz_results.html', score_percentage=score_percentage)
+
 def calculate_score(quiz_res):
     total_questions = len(quiz_res)
     total_correct = sum(1 for responses in quiz_res for question_id, user_response in responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
+    print("Debug info:")
+    for responses in quiz_res:
+        for question_id, user_response in responses.items():
+            print("Question ID:", question_id)
+            print("User response:", user_response)
+            print("Correct answer:", quiz_questions[question_id]["correct_answer"])
     score_percentage = round(((total_correct / total_questions) * 100), 1)
     return score_percentage
+
 
 if __name__ == '__main__':
     app.run(debug=True)
