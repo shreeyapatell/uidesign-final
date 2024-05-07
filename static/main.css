@@ -104,3 +104,29 @@ p {
     font-size: 20px;
 }
 
+.center {
+    text-align: center;
+  }
+  
+.score {
+    font-size: 20px;
+    font-weight: bolder;
+}
+
+.result-section {
+    margin-bottom: 20px;
+}
+
+.bold {
+    font-weight: bolder;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.button-container .center {
+    display: inline-block;
+    margin: 0 10px; /* Adjust the margin as needed */
+}
+

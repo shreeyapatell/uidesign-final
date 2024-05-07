@@ -234,8 +234,13 @@ def quiz(quiz_id):
         # Redirect to quiz results page if it's the last question
         if question["next_q"] == "end":
             score_percentage = calculate_score(quiz_res)
+            correct_answers, incorrect_answers = user_answers(quiz_res)
             quiz_res = []
-            return render_template('quiz_results.html', score_percentage=score_percentage)
+            return render_template('quiz_results.html', 
+                                   score_percentage=score_percentage, 
+                                   correct_answers=correct_answers,
+                                   incorrect_answers=incorrect_answers,
+                                   quiz_id=quiz_id)
         
         # Render the next question
         next_question_id = question["next_q"]
@@ -267,16 +272,23 @@ def submit_final_quiz():
     print(user_responses)
     print(quiz_res)
 
+    correct_answers, incorrect_answers = user_answers(quiz_res)
+    print("correct: ", correct_answers)
+    print("incorrect: ", incorrect_answers)
+
     # If all questions are answered, calculate the score
     score_percentage = calculate_score(quiz_res)
     print(score_percentage)
     quiz_res = []  # Reset quiz responses
-    return render_template('final_quiz_results.html', score_percentage=score_percentage)
+    return render_template('final_quiz_results.html', 
+                           score_percentage=score_percentage, 
+                           correct_answers=correct_answers, 
+                           incorrect_answers=incorrect_answers)
 
 def calculate_score(quiz_res):
     total_questions = len(quiz_res)
     total_correct = sum(1 for responses in quiz_res for question_id, user_response in responses.items() if user_response == quiz_questions[question_id]["correct_answer"])
-    print("Debug info:")
+    print(total_correct)
     for responses in quiz_res:
         for question_id, user_response in responses.items():
             print("Question ID:", question_id)
@@ -284,6 +296,17 @@ def calculate_score(quiz_res):
             print("Correct answer:", quiz_questions[question_id]["correct_answer"])
     score_percentage = round(((total_correct / total_questions) * 100), 1)
     return score_percentage
+
+def user_answers(quiz_res):
+    correct_answers = []
+    incorrect_answers = []
+    for responses in quiz_res:
+        for question_id, user_response in responses.items():
+            if user_response == quiz_questions[question_id]["correct_answer"]:
+                correct_answers.append(quiz_questions[question_id])
+            else: 
+                incorrect_answers.append(quiz_questions[question_id])
+    return correct_answers, incorrect_answers
 
 
 if __name__ == '__main__':

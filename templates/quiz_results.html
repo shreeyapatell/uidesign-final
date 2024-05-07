@@ -2,12 +2,65 @@
 <body>
   <div class="container">
     <br>
-    <h1>Quiz Results</h1>
-    <p>Your score: {{ score_percentage }}%</p>
-    <div class="center">
-      <button id="next_unit">Home</button> 
+    <h1 class="center">Quiz Results</h1>
+    <p class="score center">Your score: <span class="bold">{{ score_percentage }}%</span></p>
+    
+    {% if correct_answers %}
+    <h2 class="center">Correct Answers</h2>
+    {% for answer in correct_answers %}
+    <div class="results-section">
+      <p>Question: {{ answer.title }}</p>
+      <iframe
+          width="400"
+          height="200"
+          src="{{ answer.correct_answer }}"
+          title="Correct Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="no-referrer"
+          allowfullscreen
+      ></iframe>
     </div>
+    {% endfor %}
+    {% else %}
+    <p class="center">No correct answers</p>
+    {% endif %}
+    
+    {% if incorrect_answers %}
+    <h2 class="center">Incorrect Answers</h2>
+    {% for answer in incorrect_answers %}
+    <div class="results-section">
+      <p>Question: {{ answer.title }}</p>
+      <iframe
+          width="400"
+          height="200"
+          src="{{ answer.correct_answer }}"
+          title="Correct Video"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="no-referrer"
+          allowfullscreen
+      ></iframe>
+    </div>
+    {% endfor %}
+    {% else %}
+    <p class="center">No incorrect answers</p>
+    {% endif %}
+    
+    <div class="button-container">
+      <div class="center">
+          <a href="/" class="btn btn-primary">Home</a> 
+      </div>
+        <div class="center">
+            {% set quiz_id_int = quiz_id | int %}
+            {% if quiz_id_int in [1, 2, 3] %}
+            <a href="/quiz/1" class="btn btn-primary">Practice Again</a> 
+            {% elif quiz_id_int in [4, 5, 6, 7] %}
+            <a href="/quiz/5" class="btn btn-primary">Practice Again</a> 
+            {% endif %}
+        </div>
+      </div>
+  
+  
   </div>
 </body>
-
-

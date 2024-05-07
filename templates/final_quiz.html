@@ -2,11 +2,11 @@
 <body>
   <div class="container">
     {% for question in questions %}
-    <div id="question{{ loop.index }}" class="question {% if loop.index != 1 %}hidden{% endif %}">
+    <div id="question{{ question.quiz_id }}" class="question {% if loop.index != 1 %}hidden{% endif %}">
       <h1>Question {{ loop.index }}</h1>
-      <p> {{ question.quiz_id }}</p>
+      <!-- <p> {{ question.quiz_id }}</p> -->
       <p id="question-title">{{ question.title }}?</p>
-      <form id="quiz_form_{{ loop.index }}" class="quiz-form" method="post" action="/final_quiz/submit">
+      <form id="quiz_form_{{ question.quiz_id }}" class="quiz-form" method="post" action="/final_quiz/submit">
         <!-- Quiz questions and options here -->
           <br><br>
           <div class="row">
@@ -67,63 +67,65 @@
   </div>
 </body>
 
+
 <script>
-const submitButton = document.getElementById('submit_button');
-const questions = document.querySelectorAll('.question');
+    const submitButton = document.getElementById('submit_button');
+    const questions = document.querySelectorAll('.question');
 
-// Submit button click event listener
-submitButton.addEventListener('click', () => {
-    const formData = new FormData();
+    // Submit button click event listener
+    submitButton.addEventListener('click', () => {
+        const formData = new FormData();
 
-    questions.forEach((question, index) => {
-        const form = question.querySelector('form');
-        const formDataPart = new FormData(form);
-        const questionId = form.getAttribute('id'); // Use form ID as question ID
-        formDataPart.append('question_id', questionId); // Append question ID
-        for (const pair of formDataPart.entries()) {
-            formData.append(pair[0], pair[1]); // Append each pair to the main formData
-        }
-    });
-
-    // Submit the form with all answers
-    fetch('/final_quiz/submit', {
-        method: 'POST',
-        body: formData
-    })
-    .then(response => {
-        if (response.redirected) {
-            window.location.href = response.url;  // Redirect to the redirected URL
-        } else {
-            if (response.ok) {
-                return response.text();  // Return the response text if the request is successful
-            } else {
-                throw new Error(`Server returned status: ${response.status}`);
+        questions.forEach((question, index) => {
+            const form = question.querySelector('form');
+            const formDataPart = new FormData(form);
+            const questionId = question.getAttribute('id').substring(8); // Extract question ID from the element ID
+            console.log(questionId);
+            formDataPart.append('question_id', questionId); // Append question ID
+            for (const pair of formDataPart.entries()) {
+                formData.append(pair[0], pair[1]); // Append each pair to the main formData
             }
+        });
+
+        // Submit the form with all answers
+        fetch('/final_quiz/submit', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => {
+            if (response.redirected) {
+                window.location.href = response.url;  // Redirect to the redirected URL
+            } else {
+                if (response.ok) {
+                    return response.text();  // Return the response text if the request is successful
+                } else {
+                    throw new Error(`Server returned status: ${response.status}`);
+                }
+            }
+        })
+        .then(data => {
+            // Update the DOM with the received HTML content
+            document.body.innerHTML = data;
+        })
+        .catch(error => {
+            console.error('Error submitting quiz:', error);
+        });
+    });
+
+
+    // Show submit button when all questions are answered
+    function showSubmitButton() {
+        const answeredQuestions = document.querySelectorAll('.question form input[type="radio"]:checked');
+        if (answeredQuestions.length === questions.length) {
+            submitButton.parentNode.classList.remove('hidden');
         }
-    })
-    .then(data => {
-        // Update the DOM with the received HTML content
-        document.body.innerHTML = data;
-    })
-    .catch(error => {
-        console.error('Error submitting quiz:', error);
-    });
-});
-
-
-// Show submit button when all questions are answered
-function showSubmitButton() {
-    const answeredQuestions = document.querySelectorAll('.question form input[type="radio"]:checked');
-    if (answeredQuestions.length === questions.length) {
-        submitButton.parentNode.classList.remove('hidden');
     }
-}
 
-// Listen for changes in radio button selections
-questions.forEach(question => {
-    question.addEventListener('change', () => {
-        showSubmitButton();
+    // Listen for changes in radio button selections
+    questions.forEach(question => {
+        question.addEventListener('change', () => {
+            showSubmitButton();
+        });
     });
-});
 
 </script>
