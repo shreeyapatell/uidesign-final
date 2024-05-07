@@ -23,14 +23,14 @@
     </div>
     {% endfor %}
     {% else %}
-    <p class="center">No correct answers</p>
+    <p class="center">No correct answers. Please relearn this unit!</p>
     {% endif %}
     
     {% if incorrect_answers %}
     <h2 class="center">Incorrect Answers</h2>
     {% for answer in incorrect_answers %}
     <div class="results-section">
-      <p>Question: {{ answer.title }}</p>
+      <p>Question: {{ answer.title }}?</p>
       <iframe
           width="400"
           height="200"
@@ -44,7 +44,7 @@
     </div>
     {% endfor %}
     {% else %}
-    <p class="center">No incorrect answers</p>
+    <p class="center">No incorrect answers. Great job!</p>
     {% endif %}
     
     <div class="button-container">
@@ -59,8 +59,16 @@
             <a href="/quiz/5" class="btn btn-primary">Practice Again</a> 
             {% endif %}
         </div>
+        <div class="center">
+          {% set quiz_id_int = quiz_id | int %}
+              {% if quiz_id_int in [1, 2, 3] %}
+              <a href="/learn/6" class="btn btn-primary">Continue to Unit 2</a> 
+              {% elif quiz_id_int in [4, 5, 6, 7] %}
+              <a href="/learn/1" class="btn btn-primary">Return to Unit 1</a> 
+              {% endif %}
       </div>
-  
+      </div>
+      
   
   </div>
 </body>
