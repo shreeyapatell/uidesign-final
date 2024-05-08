@@ -130,3 +130,12 @@ p {
     margin: 0 10px; /* Adjust the margin as needed */
 }
 
+.message-box {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+  }
+  
+
+
