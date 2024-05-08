@@ -11,4 +11,5 @@ Learn basic phrases that will allow you to give directions to someone in America
 # Demo
 [![Video Demo - Teaching Basic Directions in Sign Language](http://img.youtube.com/vi/4b-n5iaR4GM/0.jpg)](http://www.youtube.com/watch?v=4b-n5iaR4GM)
 
-By Shreeya Patel, Rhea Charles, Shinjini Mukherjee, and Anjali Smith
+By Shreeya Patel, Rhea Charles, Shinjini Mukherjee, and Anjali Smith. 
+Also HUGE SHOUTOUT TO BEN FOR BEING THE BEST TA EVER! :D
