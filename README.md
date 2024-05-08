@@ -9,6 +9,7 @@ Learn basic phrases that will allow you to give directions to someone in America
 2. In a web browser, visit http://127.0.0.1:5000/
 
 # Demo
+Click to Watch Video Demo - Teaching Basic Directions in Sign Language
 [![Click to Watch Video Demo - Teaching Basic Directions in Sign Language](http://img.youtube.com/vi/4b-n5iaR4GM/0.jpg)](http://www.youtube.com/watch?v=4b-n5iaR4GM)
 
 By Shreeya Patel, Rhea Charles, Shinjini Mukherjee, and Anjali Smith. 
